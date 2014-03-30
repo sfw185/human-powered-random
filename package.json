@@ -1,0 +1,29 @@
+{
+  "name": "human-rng",
+  "version": "0.0.0",
+  "description": "A human powered randomness generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/FaridW/human-rng.git"
+  },
+  "keywords": [
+    "rng",
+    "random",
+    "randomness",
+    "noise",
+    "chaos"
+  ],
+  "author": "Farid Wardan",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/FaridW/human-rng/issues"
+  },
+  "homepage": "https://github.com/FaridW/human-rng",
+  "dependencies": {
+    "express": "~3.5.1"
+  }
+}
