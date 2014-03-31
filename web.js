@@ -5,7 +5,7 @@ var app = express();
 
 app.use(logfmt.requestLogger());
 
-app.get('/', function(request, response) {
+app.get('/', function (request, response) {
 
   var options = {
     path: '/v1/media/popular?client_id=5d8fd13a49b949279f0ee9eb5b11f65b',
@@ -14,23 +14,39 @@ app.get('/', function(request, response) {
   };
 
   var https = require('https');
-  https.get(options, function(res) {
+  https.get(options, function (res) {
     var body = '';
 
     res.on('data', function (chunk) {
       body += chunk;
     });
 
-    res.on('end', function(){
+    res.on('end', function (){
       var api_response = JSON.parse(body);
       var data = api_response.data;
       var media = data[0]; // Get first image
 
       var web_url = media.link;
-      var image_url = media.images.low_resolution.url; // Also available are 'thumbnail' and 'standard_resolution'
+      var image_url = media.images.low_resolution.url;
+      var comments = media.comments;
+
+      var crypto = require('crypto')
+      var sha1 = crypto.createHash('sha1');
+      sha1.update(JSON.stringify(comments));
+      var the_hash = sha1.digest('hex');
+
+      var rc4 = require('rc4');
+      var generator = new rc4(the_hash);
+      var random = generator.randomFloat();
 
       var jade = require('jade');
-      var html = jade.renderFile('template.jade',{web: web_url, image: image_url});
+      var html = jade.renderFile('template.jade',{
+        web: web_url,
+        image: image_url,
+        count: comments.length,
+        hash: the_hash,
+        random: random
+      });
 
       response.send(html);
       response.end();

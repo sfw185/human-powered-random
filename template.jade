@@ -20,23 +20,32 @@ html(lang='en')
         margin-left:-153px;
         margin-top:-153px;
         background-color:rgba(0,0,0);
-        background-color:rgba(0,0,0,0.7);
+        background-color:rgba(0,0,0,0.5);
         text-align:center;
       }
       div a {color:#FFF}
       h1 {margin:20px;15px;font-size:17px;}
       p {margin:10px 10px;}
       small {font-size:10px}
-    title Human Powered Randomness
+    title Human Powered Randomn
   body(style="background-image:url(" + image + ")")
     div
       h1 Human Powered Random
-      p Your random was sourced from<br/>
+      p
+        | Random came from
+        strong= count
+        |  comments on<br/>
         a(href=web) this Instagram
-      p We hashed it to
-      p Binary decision on this is
-      p Raw value is
-      p Multiply raw value by your range to get number between 0 and your range
+      p We hashed them using sha1<br/>
+        small= hash
+      p To give a random value of<br/>
+        strong= random
+      p Binary decision is<br/>
+        if (random >= 0.5)
+          strong Yes
+        else
+          strong No
+        end
       p
         small
           a(href='https://github.com/FaridW/human-rng') Source on GitHub
