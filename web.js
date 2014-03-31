@@ -32,8 +32,10 @@ app.get('/', function (request, response) {
 
       var crypto = require('crypto')
       var sha1 = crypto.createHash('sha1');
-      sha1.update(JSON.stringify(comments));
+      sha1.update(JSON.stringify(comments.data));
       var the_hash = sha1.digest('hex');
+
+      console.log(comments.length);
 
       var rc4 = require('rc4');
       var generator = new rc4(the_hash);
@@ -43,7 +45,7 @@ app.get('/', function (request, response) {
       var html = jade.renderFile('template.jade',{
         web: web_url,
         image: image_url,
-        count: comments.length,
+        count: comments.count,
         hash: the_hash,
         random: random
       });
