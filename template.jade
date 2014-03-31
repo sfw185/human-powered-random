@@ -1,50 +1,32 @@
 doctype html
 html(lang='en')
   head
+    title Human Powered Random
+    meta(name='viewport', content='width=device-width, user-scalable=yes')
     style.
       * {padding:0;margin:0;}
-      body {
-        font-size:14px;
-        font-family:Helvetica,Arial,sans-serif;
-        background-position:center;
-        background-attachment:fixed;
-        background-repeat:no-repeat
-      }
-      div {
-        color:#FFF;
-        width:306px;
-        height:306px;
-        position:absolute;
-        top:50%;
-        left:50%;
-        margin-left:-153px;
-        margin-top:-153px;
-        background-color:rgba(0,0,0);
-        background-color:rgba(0,0,0,0.5);
-        text-align:center;
-      }
+      body{background-color:#000;font-size:14px;font-family:Helvetica,Arial,sans-serif;background-position:center;background-attachment:fixed;background-repeat:no-repeat;}
+      div {color:#FFF;position:absolute;top:50%;left:50%;background-color:#000;background-color:rgba(0,0,0,0.9);text-align:center;}
       div a {color:#FFF}
-      h1 {margin:20px;15px;font-size:17px;}
-      p {margin:10px 10px;}
-      small {font-size:10px}
-    title Human Powered Randomn
-  body(style="background-image:url(" + image + ")")
-    div
+      h1 {margin:30px 20px;font-size:17px;}
+      p {margin:20px 10px;}
+      strong{color:#000;background-color:#FFF;padding:3px;display:inline-block;height:15px;line-height:15px;}
+      small {font-size:10px;}
+  body(style='background-image:url(' + image.url + ');')
+    div(style='width:' + image.width/2 + 'px;height:' + image.height/2 + 'px;margin-left:-' + image.width/4 + 'px;margin-top:-' + image.height/4 + 'px;')
       h1 Human Powered Random
+      p We found this random<br/>
+        a(href=web) popular Instagram<br/>
       p
-        | Random came from
+        | We blended up its
         = ' ' + count + ' '
-        | comments on<br/>
-        a(href=web) this Instagram
-      p We hashed them using sha1<br/>
-        small= hash
-      p To give a random value of<br/>
+        | comments to get<br/>
         strong= random
-      p Binary decision is<br/>
+      p We also tossed a coin, it came up<br/>
         if (random >= 0.5)
-          strong Yes
+          strong Heads
         else
-          strong No
+          strong Tails
         end
       p
         small

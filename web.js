@@ -26,16 +26,14 @@ app.get('/', function (request, response) {
       var data = api_response.data;
       var media = data[0]; // Get first image
 
+      var image = media.images.standard_resolution; // Contains url, width, height
       var web_url = media.link;
-      var image_url = media.images.low_resolution.url;
       var comments = media.comments;
 
       var crypto = require('crypto')
       var sha1 = crypto.createHash('sha1');
       sha1.update(JSON.stringify(comments.data));
       var the_hash = sha1.digest('hex');
-
-      console.log(comments.length);
 
       var rc4 = require('rc4');
       var generator = new rc4(the_hash);
@@ -44,7 +42,7 @@ app.get('/', function (request, response) {
       var jade = require('jade');
       var html = jade.renderFile('template.jade',{
         web: web_url,
-        image: image_url,
+        image: image,
         count: comments.count,
         hash: the_hash,
         random: random
