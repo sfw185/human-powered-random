@@ -1,17 +1,11 @@
 var express = require('express');
 var logfmt = require('logfmt');
-var https = require('https');
-var jade = require('jade');
 
 var app = express();
 
 app.use(logfmt.requestLogger());
 
 app.get('/', function(request, response) {
-  response.send('Hello World! See <a href="/generate">/generate</a>').end();
-});
-
-app.get('/generate', function(request, response) {
 
   var options = {
     path: '/v1/media/popular?client_id=5d8fd13a49b949279f0ee9eb5b11f65b',
@@ -19,6 +13,7 @@ app.get('/generate', function(request, response) {
     headers: {'user-agent': 'Human-powered Randomness (https://github.com/FaridW/human-rng)'}
   };
 
+  var https = require('https');
   https.get(options, function(res) {
     var body = '';
 
@@ -29,19 +24,16 @@ app.get('/generate', function(request, response) {
     res.on('end', function(){
       var api_response = JSON.parse(body);
       var data = api_response.data;
+      var media = data[0]; // Get first image
 
-      response.send(api_response);
+      var web_url = media.link;
+      var image_url = media.images.low_resolution.url; // Also available are 'thumbnail' and 'standard_resolution'
+
+      var jade = require('jade');
+      var html = jade.renderFile('template.jade',{web: web_url, image: image_url});
+
+      response.send(html);
       response.end();
-
-      for (var i = 0; i < data.length; i++)
-      {
-        var media = data[i];
-        var web_url = media.link;
-        var image_url = media.images.standard_resolution.url;
-        var caption = media.caption.text;
-
-        console.log(caption + ' ' + web_url + ' ' + image_url);
-      }
     });
   });
 });

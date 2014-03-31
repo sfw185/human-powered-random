@@ -1,0 +1,42 @@
+doctype html
+html(lang='en')
+  head
+    style.
+      * {padding:0;margin:0;}
+      body {
+        font-size:14px;
+        font-family:Helvetica,Arial,sans-serif;
+        background-position:center;
+        background-attachment:fixed;
+        background-repeat:no-repeat
+      }
+      div {
+        color:#FFF;
+        width:306px;
+        height:306px;
+        position:absolute;
+        top:50%;
+        left:50%;
+        margin-left:-153px;
+        margin-top:-153px;
+        background-color:rgba(0,0,0);
+        background-color:rgba(0,0,0,0.7);
+        text-align:center;
+      }
+      div a {color:#FFF}
+      h1 {margin:20px;15px;font-size:17px;}
+      p {margin:10px 10px;}
+      small {font-size:10px}
+    title Human Powered Randomness
+  body(style="background-image:url(" + image + ")")
+    div
+      h1 Human Powered Random
+      p Your random was sourced from<br/>
+        a(href=web) this Instagram
+      p We hashed it to
+      p Binary decision on this is
+      p Raw value is
+      p Multiply raw value by your range to get number between 0 and your range
+      p
+        small
+          a(href='https://github.com/FaridW/human-rng') Source on GitHub
